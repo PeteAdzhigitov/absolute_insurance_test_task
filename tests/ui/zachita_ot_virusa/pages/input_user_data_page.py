@@ -98,10 +98,16 @@ class InputUserDataPage:
             self.__to_the_payment_button.click()
 
     def there_is_no_posobility_to_buy_police(self):
-        with allure.step('User is on payment page'):
+        with allure.step('User is on payment page and can\'t buy policy'):
             wait = WebDriverWait(self.driver, 30)
             wait.until(EC.text_to_be_present_in_element((By.XPATH, '//div[@class="note"]'), 'К сожалению, оформление полиса онлайн невозможно.'))
             assert self.__no_possobility_to_buy_policy.text == 'К сожалению, оформление полиса онлайн невозможно.'
+
+    def user_is_on_payment_page(self):
+        with allure.step('User is on payment page'):
+            wait = WebDriverWait(self.driver, 30)
+            wait.until(EC.visibility_of_element_located((By.XPATH, '//tui-svg[@automation-id="header__logo"]')))
+
 
     def check_lack_of_last_name_error(self):
         with allure.step('Check surname field of user validation error'):
