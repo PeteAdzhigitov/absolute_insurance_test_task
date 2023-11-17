@@ -69,7 +69,7 @@ def test_fill_and_successfully_send_form_with_a_valid_phone_number(driver):
                 date_of_birth=Faker(locale='ru_RU').date_between('-30y', '-20y'),
                 date_of_passport_release=Faker(locale='ru_RU').date_between('-20y', 'today'),
                 passport_series_and_number=[random.randint(0, 9) for i in range(10)],
-                phone_number=[9,1,6,0,9,4,2,8,6,7],
+                phone_number='9160942867',
                 email=Faker(locale='ru_RU').email(),
                 address='Москва')
 
@@ -98,7 +98,7 @@ def test_fill_and_successfully_send_form_with_not_valid_phone_number(driver):
                 date_of_birth=Faker(locale='ru_RU').date_between('-30y', '-20y'),
                 date_of_passport_release=Faker(locale='ru_RU').date_between('-20y', 'today'),
                 passport_series_and_number=[random.randint(0, 9) for i in range(10)],
-                phone_number=[0,0,0,0,9,4,2,8,6,7],
+                phone_number='0000942867',
                 email=Faker(locale='ru_RU').email(),
                 address='Москва')
 
@@ -128,7 +128,7 @@ def test_fill_and_successfully_send_form_with_not_insured_user(driver):
                 date_of_birth=Faker(locale='ru_RU').date_between('-30y', '-20y'),
                 date_of_passport_release=Faker(locale='ru_RU').date_between('-20y', 'today'),
                 passport_series_and_number=[random.randint(0, 9) for i in range(10)],
-                phone_number=[0,0,0,0,9,4,2,8,6,7],
+                phone_number='0000942867',
                 email=Faker(locale='ru_RU').email(),
                 address='Москва')
 
@@ -164,7 +164,7 @@ def test_fields_validation_errors(driver):
                 date_of_birth = Faker(locale='ru_RU').date_between('-30y','-20y'),
                 date_of_passport_release = Faker(locale='ru_RU').date_between('-20y','today'),
                 passport_series_and_number = [random.randint(0,9) for i in range(10)],
-                phone_number = [0,0,0,0,9,4,2,8,6,7],
+                phone_number = '0000942867',
                 email = Faker(locale='ru_RU').email(),
                 address = 'Москва')
 

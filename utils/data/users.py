@@ -7,7 +7,7 @@ class User:
         self.date_of_birth = date_of_birth.strftime('%d%m%Y')
         self.date_of_passport_release = date_of_passport_release.strftime('%d%m%Y')
         self.passport_series_and_number = ''.join(str(x) for x in passport_series_and_number)
-        self.phone_number = ''.join(str(x) for x in phone_number)
+        self.phone_number = phone_number
         self.email = email
         self.address = address
 
