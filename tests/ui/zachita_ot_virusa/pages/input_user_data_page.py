@@ -103,10 +103,19 @@ class InputUserDataPage:
             wait.until(EC.text_to_be_present_in_element((By.XPATH, '//div[@class="note"]'), 'К сожалению, оформление полиса онлайн невозможно.'))
             assert self.__no_possobility_to_buy_policy.text == 'К сожалению, оформление полиса онлайн невозможно.'
 
-    def user_is_on_payment_page(self):
+    def user_is_on_payment_page_500_000_policy(self):
         with allure.step('User is on payment page'):
             wait = WebDriverWait(self.driver, 30)
             wait.until(EC.visibility_of_element_located((By.XPATH, '//tui-svg[@automation-id="header__logo"]')))
+            amount_to_pay = self.driver.find_element(By.XPATH, '//span[@automation-id="tui-money__integer-part"]')
+            assert amount_to_pay.text == '5 000'
+
+    def user_is_on_payment_page_100_000_policy(self):
+        with allure.step('User is on payment page'):
+            wait = WebDriverWait(self.driver, 30)
+            wait.until(EC.visibility_of_element_located((By.XPATH, '//tui-svg[@automation-id="header__logo"]')))
+            amount_to_pay = self.driver.find_element(By.XPATH, '//span[@automation-id="tui-money__integer-part"]')
+            assert amount_to_pay.text == '1 500'
 
 
     def check_lack_of_last_name_error(self):

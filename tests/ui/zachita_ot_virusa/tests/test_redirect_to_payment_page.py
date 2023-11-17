@@ -62,7 +62,7 @@ def test_continue_button_is_disabled_if_user_works_in_medicine_area_with_500_pol
     with THEN('Continue button is disabled'):
         calculate_page.continue_button_not_enabled()
 
-def test_fill_and_successfully_send_form_with_a_valid_phone_number(driver):
+def test_fill_and_successfully_send_form_with_a_valid_phone_number_500_000_policy(driver):
     calculate_page = CalculatePage(driver)
     input_user_data_page = InputUserDataPage(driver)
     user = User(user_name=Faker(locale='ru_RU').name(),
@@ -89,7 +89,36 @@ def test_fill_and_successfully_send_form_with_a_valid_phone_number(driver):
         input_user_data_page.send_user_data_form()
 
     with THEN('There is no possibility to buy policy online note displaying'):
-        input_user_data_page.user_is_on_payment_page()
+        input_user_data_page.user_is_on_payment_page_500_000_policy()
+
+def test_fill_and_successfully_send_form_with_a_valid_phone_number_100_000_policy(driver):
+    calculate_page = CalculatePage(driver)
+    input_user_data_page = InputUserDataPage(driver)
+    user = User(user_name=Faker(locale='ru_RU').name(),
+                date_of_birth=Faker(locale='ru_RU').date_between('-30y', '-20y'),
+                date_of_passport_release=Faker(locale='ru_RU').date_between('-20y', 'today'),
+                passport_series_and_number=[random.randint(0, 9) for i in range(10)],
+                phone_number='9160942867',
+                email=Faker(locale='ru_RU').email(),
+                address='Москва')
+
+    with GIVEN('User choose 500_000 policy'):
+        calculate_page.choose_100_000_policy()
+
+    with WHEN('User click on processing user data conformation and continue button'):
+        calculate_page.click_on_confirm_abscence_of_contact_with_covid()
+        calculate_page.agree_with_processing_personal_data()
+        calculate_page.click_continue_button()
+
+    with THEN('User redirected to Buy policy page'):
+        input_user_data_page.buy_policy_page()
+
+    with WHEN('User filling form and sending it'):
+        input_user_data_page.fill_user_data_form(user_data=user, user_is_insured=True)
+        input_user_data_page.send_user_data_form()
+
+    with THEN('There is no possibility to buy policy online note displaying'):
+        input_user_data_page.user_is_on_payment_page_100_000_policy()
 
 def test_fill_and_successfully_send_form_with_not_valid_phone_number(driver):
     calculate_page = CalculatePage(driver)

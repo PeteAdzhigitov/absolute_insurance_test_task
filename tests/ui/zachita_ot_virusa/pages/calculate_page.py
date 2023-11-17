@@ -28,10 +28,9 @@ class CalculatePage:
         with allure.step('Choose policy wich costs 500 000'):
             start_of_policy = (datetime.date.today() + datetime.timedelta(days=15)).strftime('%d.%m.%Y')
             end_of_policy = (datetime.date.today() + datetime.timedelta(days=381)).strftime('%d.%m.%Y')
-            if self.__cost_of_police_5_000.get_attribute('placeholder') != '5 000':
+            if self.driver.find_elements(By.XPATH, '//span[@class="hospitalization"]')[0].text != '1 500':
                 self.__insurance_sum.click()
 
-            assert self.__cost_of_police_5_000.get_attribute('placeholder') == '5 000 ₽'
             assert self.__date_start_of_police == start_of_policy
             assert self.__date_end_of_police == end_of_policy
 
@@ -39,10 +38,9 @@ class CalculatePage:
         with allure.step('Choose policy wich costs 100 000'):
             start_of_policy = (datetime.date.today() + datetime.timedelta(days=15)).strftime('%d.%m.%Y')
             end_of_policy = (datetime.date.today() + datetime.timedelta(days=381)).strftime('%d.%m.%Y')
-            if self.__cost_of_police_1_500.get_attribute('placeholder') != '1 500':
+            if self.driver.find_elements(By.XPATH, '//span[@class="hospitalization"]')[0].text != '500':
                 self.__insurance_sum.click()
 
-            assert self.__cost_of_police_1_500.get_attribute('placeholder') == '1 500 ₽'
             assert self.__date_start_of_police == start_of_policy
             assert self.__date_end_of_police == end_of_policy
 
