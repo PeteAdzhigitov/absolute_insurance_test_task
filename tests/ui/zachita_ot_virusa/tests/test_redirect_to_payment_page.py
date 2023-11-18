@@ -143,7 +143,6 @@ def test_fill_and_successfully_send_form_with_not_valid_phone_number(driver):
         input_user_data_page.buy_policy_page()
 
     with WHEN('User filling form and sending it'):
-        driver.implicitly_wait(5)
         input_user_data_page.fill_user_data_form(user_data=user, user_is_insured=True)
         input_user_data_page.send_user_data_form()
 
@@ -179,7 +178,6 @@ def test_fill_and_successfully_send_form_with_not_insured_user(driver):
         input_user_data_page.buy_policy_page()
 
     with WHEN('User filling form and sending it'):
-        driver.implicitly_wait(5)
         input_user_data_page.fill_user_data_form(user_data=user, user_is_insured=False)
         input_user_data_page.fill_insured_person_info_form(user_data=insured_user)
         input_user_data_page.send_user_data_form()
@@ -220,7 +218,6 @@ def test_fields_validation_errors(driver):
     with WHEN('User clicks om insured user checkbox and send unfilled form'):
         input_user_data_page.click_on_user_is_insured()
         input_user_data_page.send_user_data_form()
-        driver.implicitly_wait(5)
 
     with THEN('Validation errors show up'):
         pass
@@ -231,7 +228,6 @@ def test_fields_validation_errors(driver):
                                           user.user_name.split()[0])
         input_user_data_page.user_name_field.send_keys(Keys.ENTER)
         input_user_data_page.send_user_data_form()
-        driver.implicitly_wait(5)
 
     with THEN('Name field validation error changed on lack of name'):
         input_user_data_page.check_lack_of_name_error()
@@ -245,20 +241,16 @@ def test_fields_validation_errors(driver):
         input_user_data_page.check_lack_date_of_birth_error()
         input_user_data_page.empty_space.click()
         input_user_data_page.send_user_data_form()
-        time.sleep(2)
-
         input_user_data_page.check_lack_date_of_birth_of_insured_error()
         input_user_data_page.check_lack_surname_of_insured_error()
         input_user_data_page.fill_element(input_user_data_page.fio_of_insured_field,
                                           insured_user.insured_name.split()[0])
         input_user_data_page.fill_element(input_user_data_page.date_of_birth_of_insured_field,quite_recent_date)
         input_user_data_page.send_user_data_form()
-        driver.implicitly_wait(5)
 
     with THEN('Date of birth and Name field of insured user validates with another error'):
         input_user_data_page.check_lack_date_of_birth_of_insured_error_not_correct_day()
         input_user_data_page.check_lack_name_of_insured_error()
-        driver.implicitly_wait(5)
 
     with WHEN('User clears date of birth and pass correct date'):
         input_user_data_page.date_of_birth_of_insured_field.clear()
@@ -267,7 +259,6 @@ def test_fields_validation_errors(driver):
                                                                       insured_user.insured_user_date_of_birth)
         input_user_data_page.date_of_birth_of_insured_field.send_keys(Keys.ENTER)
         input_user_data_page.send_user_data_form()
-        driver.implicitly_wait(1)
 
     with THEN('Additional fields are showed up and checked'):
         input_user_data_page.check_lack_date_of_passport_release_of_insured_error()

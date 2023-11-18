@@ -72,7 +72,6 @@ class InputUserDataPage:
                 else:
                     pass
 
-            time.sleep(3)
             self.user_name_field.send_keys(user_data.user_name)
             self.user_date_of_birth_field.send_keys(user_data.date_of_birth)
             self.date_of_passport_release.send_keys(user_data.date_of_passport_release)
@@ -87,7 +86,6 @@ class InputUserDataPage:
             self.fio_of_insured_field.send_keys(user_data.insured_name)
             self.date_of_birth_of_insured_field.send_keys(user_data.insured_user_date_of_birth)
             self.date_of_birth_of_insured_field.send_keys(Keys.ENTER)
-            time.sleep(5)
             wait = WebDriverWait(self.driver, 10)
             wait.until(EC.element_to_be_clickable((By.ID, 'idInsured')))
             self.series_and_number_of_passport_of_insured_field.send_keys(user_data.insured_passport_number)
@@ -96,6 +94,8 @@ class InputUserDataPage:
     def send_user_data_form(self):
         with allure.step('Send form'):
             self.__to_the_payment_button.click()
+            wait = WebDriverWait(self.driver, 10)
+            wait.until(EC.invisibility_of_element_located((By.XPATH, '//div[@class="loader" and @style="display: block;"]')))
 
     def there_is_no_posobility_to_buy_police(self):
         with allure.step('User is on payment page and can\'t buy policy'):

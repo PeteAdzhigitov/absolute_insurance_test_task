@@ -10,6 +10,7 @@ def driver():
     options = Options()
     options.add_argument("--start-maximized")
     driver = Chrome(options=options)
+    driver.implicitly_wait(10.00)
     driver.get("https://old.absolutins.ru/kupit-strahovoj-polis/strahovanie-zhizni-i-zdorovya/zashchita-ot-virusa/")
     yield driver
 
